@@ -1,2 +1,4 @@
-#Notebook
-this prooject is build using react native ,  node js , express js , mongodb
+# Notebook
+tech stack :  react native ,  node js , express js , mongodb
+
+
