@@ -33,11 +33,10 @@ const SignUp = () => {
 
       if (res.status === 201) {
         console.log("Registration successful:", res.data);
-
         await AsyncStorage.setItem("authToken", res.data.token);
         AsyncStorage.setItem("isLoggedIn", JSON.stringify(true))
-        router.push("/"); // Navigate to home after successful registration
-      }
+        router.replace('/(tabs)');
+}
     } catch (error) {
       console.error("Registration failed:", error.response?.data || error.message);
     } finally {

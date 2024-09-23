@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         justifyContent: "center",
     },
-    buttonTitle: {
+    buttonTitle: { 
         textAlign: "center",
         color: theme.colors.textLight,
         fontSize: theme.radius.xxl,

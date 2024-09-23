@@ -1,17 +1,24 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import ScreenWrapper from "../components/ScreenWrapper.jsx"
-import Icon from "../assets/icons/index.jsx"
-import { StatusBar } from 'expo-status-bar'
-import { theme } from "../constants/theme.js"
-import { LinearGradient } from 'expo-linear-gradient'
-import { useRouter } from 'expo-router'
-const index = () => {
-    const router = useRouter()
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import ScreenWrapper from "../components/ScreenWrapper.jsx";
+import Icon from "../assets/icons/index.jsx";
+import { StatusBar } from 'expo-status-bar';
+import { theme } from "../constants/theme.js";
+import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const Index = async () => {
+    const router = useRouter();
+    const auth = await AsyncStorage.getItem("authToken");
+
+    if (auth) {
+        router.replace('/(tab)');
+    }
+
     return (
         <ScreenWrapper bg="white">
             <StatusBar style='dark' />
-            <View style={styles.container} >
+            <View style={styles.container}>
                 <View style={styles.logo}>
                     <Icon name="BookIcon" width={50} height={90}
                         strokeWidth={1.9}
@@ -21,51 +28,43 @@ const index = () => {
                 </View>
 
                 <View style={styles.footer}>
-                    <Text style={{fontSize:18}}>welcome</Text>
+                    <Text style={{ fontSize: 18 }}>Welcome</Text>
                     <Text style={styles.punchLine}>
                         Track Your Schedule & Work With Ease
                     </Text>
-                    <Pressable style={styles.button} onPress={()=>router.push("SignUp")}>
-
+                    <Pressable style={styles.button} onPress={() => router.push("SignUp")}>
                         <Text style={styles.buttonText}>Get Started</Text>
-
                     </Pressable>
                 </View>
-
-
-
             </View>
         </ScreenWrapper>
-    )
-}
+    );
+};
 
-export default index
+export default Index;
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
-        backgroundColor:"#fff"
+        backgroundColor: "#fff"
     },
     title: {
         color: theme.colors.primary,
         fontWeight: theme.fonts.extrabold,
         fontSize: 33,
         marginLeft: 5,
-
     },
     logo: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
         marginTop: 3,
-    }
-    , footer: {
+    },
+    footer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 0,
-
     },
     button: {
         backgroundColor: "#702fd4",
@@ -75,12 +74,11 @@ const styles = StyleSheet.create({
         marginTop: 65,
         alignItems: "center",
         justifyContent: "center",
-
-    }, buttonText: {
+    },
+    buttonText: {
         fontSize: 20,
         color: "white",
-        fontWeight: "bold"
-
+        fontWeight: "bold",
     },
     punchLine: {
         color: theme.colors.textDark,
@@ -90,6 +88,5 @@ const styles = StyleSheet.create({
         width: "75%",
         fontWeight: theme.fonts.extrabold,
         lineHeight: 40,
-
     }
-})
+});

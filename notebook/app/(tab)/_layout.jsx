@@ -1,25 +1,21 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Tabs } from 'expo-router'
+import { Tabs } from "expo-router"
+import TabBar from "../../components/TabBar"
+
 
 const _layout = () => {
     return (
-        <Tabs>
-            <Tabs.Screen
-                name="home"
-                options={{
-                    tabBarLabel: 'Home',
-                    // Customize your tab options here (e.g., add icons)
-                }}
-            />
-            <Tabs.Screen
-                name="about"
-                options={{
-                    tabBarLabel: 'Profile',
-                    // Add icon or other options here
-                }}
-            />
-           
+        <Tabs
+            tabBar={props => <TabBar {...props} />}
+            screenOptions={
+                {
+                    headerShown: false
+                }
+            }>
+            <Tabs.Screen name="index" />
+            <Tabs.Screen name="Quick" />
+            <Tabs.Screen name="Search" />
+            <Tabs.Screen name="AiChat" />
+            <Tabs.Screen name="Account" />
         </Tabs>
     )
 }

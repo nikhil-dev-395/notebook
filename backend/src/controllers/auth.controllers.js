@@ -47,12 +47,9 @@ const Login = async (req, res) => {
   try {
     // Find user by email
     const signin = await User.findOne({ email });
-
-    // check if user is already exist or not
     if (!signin) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-    // Compare passwords
     const isMatch = await bcrypt.compare(password, signin.password);
     
     let token = jwt.sign({ email: signin.email, userId: signin._id }, "secret");

@@ -6,7 +6,7 @@ import isLoggedIn from "../middleware/isLoggedIn.js";
 const router = Router();
 
 router.post("/register", Register);
-router.get("/login", Login);
+router.post("/login", Login);
 router.get("/protected", isLoggedIn, (req, res) => {
   res.send("hii this is protected");
 });
