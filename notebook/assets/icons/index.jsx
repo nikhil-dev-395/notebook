@@ -8,6 +8,8 @@ import HomeIcon from "./HomeIcon.jsx";
 import AddIcon from "./AddIcon.jsx";
 import SearchIcon from "./SearchIcon.jsx";
 import AiIcon from "./AiIcon.jsx";
+import TaskIcon from "./TaskIcon.jsx";
+import SendArrowIcon from "./SendArrowIcon.jsx";
 
 const icons = {
     BookIcon: BookIcon,
@@ -19,6 +21,8 @@ const icons = {
     HomeIcon: HomeIcon,
     AddIcon: AddIcon,
     AiIcon: AiIcon,
+    TaskIcon: TaskIcon,
+    SendArrowIcon: SendArrowIcon,
     // EditIcon: EditIcon,
     // DeleteIcon: DeleteIcon,
     SearchIcon: SearchIcon,

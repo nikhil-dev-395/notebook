@@ -3,14 +3,16 @@
 import User from "../models/User.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+/* -------------------------------------------------------------------------------
+  */
 // Register function
 const Register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     // Check if all fields are provided
-    if (!username || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
+    // if (!username || !email || !password) {
+    //   return res.status(400).json({ message: "All fields are required" });
+    // }
     // Check if user already exists
     const existUser = await User.findOne({ email });
     if (existUser) {
@@ -26,7 +28,7 @@ const Register = async (req, res) => {
       password: hashPassword,
     });
 
-    let token = jwt.sign({ email:signUp.email ,  userId : signUp._id}, "secret");
+    let token = jwt.sign({ email: signUp.email, userId: signUp._id }, "secret");
     console.log("token: ", token);
 
     res.status(201).json({
@@ -40,6 +42,9 @@ const Register = async (req, res) => {
   }
 };
 
+/* -------------------------------------------------------------------------------
+  */
+
 // Login function
 const Login = async (req, res) => {
   const { email, password } = req.body;
@@ -51,7 +56,7 @@ const Login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
     const isMatch = await bcrypt.compare(password, signin.password);
-    
+
     let token = jwt.sign({ email: signin.email, userId: signin._id }, "secret");
     console.log("token: ", token);
     if (isMatch) {
