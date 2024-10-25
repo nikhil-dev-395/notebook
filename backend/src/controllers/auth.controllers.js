@@ -1,4 +1,4 @@
-// "controllers/auth.js"
+// "auth.controllers.js"
 
 import User from "../models/User.models.js";
 import bcrypt from "bcrypt";

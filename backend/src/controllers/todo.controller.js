@@ -1,4 +1,24 @@
 import todo from "../models/Todo.models.js";
+const getTodo = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    if (!userId) {
+      return res.status(400).send({ message: "User ID is required." });
+    }
+    const findTodo = await todo.find({ userId });
+    if (!findTodo) {
+      return res
+        .status(404)
+        .send({ message: "No chat records found for this user." });
+    }
+    res.status(200).send(findTodo);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send({ message: "An error occurred while fetching chat records." });
+  }
+};
 
 const createTodo = async (req, res) => {
   try {
@@ -71,4 +91,4 @@ const updateTodo = async (req, res) => {
   }
 };
 
-export { createTodo, deleteTodo, updateTodo };
+export { getTodo, createTodo, deleteTodo, updateTodo };

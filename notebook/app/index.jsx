@@ -18,7 +18,7 @@ const Index = async () => {
   const auth = await AsyncStorage.getItem("authToken");
 
   // if (auth) {
-  router.replace("/(tab)");
+  // router.replace("/(tab)");
   // }
 
   return (

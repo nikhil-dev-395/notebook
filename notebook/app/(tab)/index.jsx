@@ -1,133 +1,90 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import ScreenWrapper from '../../components/ScreenWrapper'
-import { StatusBar } from 'expo-status-bar'
-import Icon from '../../assets/icons'
-import { ScrollView } from 'react-native'
-import { theme } from '../../constants/theme'
-import { wp } from '../../helpers/common'
-import RightArrow from '../../assets/icons/RightArrow'
-import BackArrow from '../../assets/icons/BackArrow'
-import AddIcon from '../../assets/icons/AddIcon'
+// components/index.js
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  Pressable,
+  ScrollView,
+  KeyboardAvoidingView,
+  Keyboard,
+  SafeAreaView,
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import ScreenWrapper from "../../components/ScreenWrapper.jsx";
+import Icon from "../../assets/icons/index.jsx"; // Assuming you have an icon component for the send button
+import TodoList from "../../components/TodoList.jsx";
 
 const index = () => {
-    let email = "nikhilw395@gmail.com"
-    const emailLength = email.length;
+ 
+  return (
+    <ScreenWrapper>
+      <SafeAreaView style={{ flex: 1 }}>
+        <TodoList />
+      </SafeAreaView>
+    </ScreenWrapper>
+  );
+};
 
-    /*
-        1. quick note //index
-        2. task list // index
-        3. ai tadka
-        4. history
-        5. account
-    
-    here i added all the files in (tab) folder - 19 september
-    
-    */
-
-    return (
-        <ScreenWrapper bg="white">
-            <StatusBar backgroundColor='white' />
-
-            <ScrollView >
-
-                <View style={styles.container}>
-
-                    <View style={styles.iconBox}>
-                        <Icon name="User" width="40" height=" 40" />
-                        <View style={{ gap: 2, marginLeft: 50 }}>
-                            <Text style={{ fontSize: 20 }}>
-                                nikhil wankhade
-                            </Text>
-                            {/* */}
-                            <Text>
-                                {
-                                    // here we need to add dynamically email addresses
-                                    emailLength > 18 ? email.substring(0, 18) + "...." : email
-                                }
-                            </Text>
-                        </View>
-
-
-
-                    </View>
-
-                    <View style={{backgroundColor:"pink" , borderRadius:30, margin:"auto", width:"92%" , padding: 20 , height:"auto"}}>
-
-                    <View style={styles.taskContainer}>
-                        <View style={styles.textContainer}>
-                            <RightArrow />
-                            <Text style={styles.text}>Task List</Text>
-                            <Text style={styles.text}>{"        " + "....."}</Text>
-                            <AddIcon />
-                        </View>
-
-                    </View>
-
-                    <View style={styles.taskContainer}>
-                        <View style={styles.textContainer}>
-                            <RightArrow />
-                            <Text style={styles.text}> Quick Note  </Text>
-                            <Text style={styles.text}>{"        " + "....."}</Text>
-                            <AddIcon />
-                        </View>
-
-                    </View>
-                    </View>
-
-
-
-                    
-                </View>
-            </ScrollView>
-
-        </ScreenWrapper>
-    )
-}
-
-export default index
+export default index;
 
 const styles = StyleSheet.create({
-
-    container: {
-        flex: 1,
-        paddingTop:14
-
-    }
-    ,
-    iconBox: {
-        backgroundColor: "#d1d5db",
-        padding: 15,
-        width: "90%",
-        margin: "auto",
-        justifyContent: "space-between",
-        flexDirection: "row",
-        borderRadius: theme.radius.xxl,
-        alignSelf: "start",
-        marginBottom: 30
-    },
-
-    taskContainer: {
-        backgroundColor: "yellow",
-        flex: 1,
-        padding: 15,
-        margin: "auto",
-        borderRadius: theme.radius.xl,
-        justifyContent: "center",
-        alignItems: "center",
-        height: "auto",
-        width: "100%",
-        marginBottom: 20
-    }
-    , textContainer: {
-        flexDirection: "row", 
-        justifyContent: "center", 
-        alignItems: "center",
-        marginVertical: 10, 
-    },
-    text: {
-        fontSize: 16, 
-        marginHorizontal: 5, 
-    }
-
-})
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: "#F7F7F7",
+  },
+  chatContainer: {
+    flex: 1,
+    width: "100%",
+  },
+  messageBubble: {
+    maxWidth: "80%",
+    padding: 10,
+    borderRadius: 12,
+    marginVertical: 5,
+  },
+  userMessage: {
+    backgroundColor: "#DCF8C6",
+    alignSelf: "flex-end",
+  },
+  aiMessage: {
+    backgroundColor: "#E1E1E1",
+    alignSelf: "flex-start",
+  },
+  messageText: {
+    fontSize: 15,
+    color: "#333",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#FFF",
+  },
+  input: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: "#FFF",
+    borderRadius: 25,
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    flex: 1,
+    marginRight: 10,
+  },
+  sendButton: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#FFF",
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+  },
+  error: {
+    color: "#FF4D4D",
+    marginTop: 10,
+  },
+});

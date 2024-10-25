@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 import { configDotenv } from "dotenv";
 configDotenv();
 const app = express();
@@ -10,8 +11,10 @@ import { AuthRouter } from "./src/routes/auth.routes.js";
 import { testRouter } from "./src/routes/test.routes.js";
 import { todoRouter } from "./src/routes/todo.routes.js";
 import { userRouter } from "./src/routes/user.routes.js";
+import { aiChatRouter } from "./src/routes/aiChat.routes.js";
 
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
@@ -21,6 +24,7 @@ app.use(cors());
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/todo", todoRouter);
 app.use("/api/v1/user", userRouter);
+app.use("/api", aiChatRouter);
 app.use("/test", testRouter);
 
 // server is starting from here ....

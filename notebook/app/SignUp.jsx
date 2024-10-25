@@ -1,19 +1,18 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import ScreenWrapper from "../components/ScreenWrapper.jsx"
-import { StatusBar } from 'expo-status-bar'
-import Icon from "../assets/icons/index.jsx"
-import BackButton from '../components/BackButton.jsx'
-import { theme } from '../constants/theme.js'
-import InputText from '../components/InputText.jsx'
-import Button from '../components/Button.jsx'
-import { useRouter } from 'expo-router'
-import axios from 'axios'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import ScreenWrapper from "../components/ScreenWrapper.jsx";
+import { StatusBar } from "expo-status-bar";
+import Icon from "../assets/icons/index.jsx";
+import BackButton from "../components/BackButton.jsx";
+import { theme } from "../constants/theme.js";
+import InputText from "../components/InputText.jsx";
+import Button from "../components/Button.jsx";
+import { useRouter } from "expo-router";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignUp = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
@@ -25,32 +24,35 @@ const SignUp = () => {
     console.log("onSubmit");
     console.log(username, email, password);
     try {
-      const res = await axios.post("http://192.168.40.72:3000/api/v1/auth/register", {
-        username,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "http://192.168.141.68:3000/api/v1/auth/register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
 
       if (res.status === 201) {
         console.log("Registration successful:", res.data);
         await AsyncStorage.setItem("authToken", res.data.token);
-        AsyncStorage.setItem("isLoggedIn", JSON.stringify(true))
-        router.replace('/(tabs)');
-}
+        AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
+        router.replace("/(tab)");
+      }
     } catch (error) {
-      console.error("Registration failed:", error.response?.data || error.message);
+      console.error(
+        "Registration failed:",
+        error.response?.data || error.message
+      );
     } finally {
       setLoading(false);
     }
-
-
-  }
+  };
 
   return (
     <ScreenWrapper bg="white">
       <StatusBar backgroundColor="white" />
       <View style={styles.container}>
-
         <BackButton />
 
         <View style={{ margin: 20 }}>
@@ -80,18 +82,27 @@ const SignUp = () => {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>already have an account !  </Text>
-          <Pressable onPress={() => router.push("Login")} >
-            <Text style={[styles.footerText, { fontWeight: theme.fonts.extrabold, color: theme.colors.background }]}>Log In</Text>
+          <Text style={styles.footerText}>already have an account ! </Text>
+          <Pressable onPress={() => router.push("Login")}>
+            <Text
+              style={[
+                styles.footerText,
+                {
+                  fontWeight: theme.fonts.extrabold,
+                  color: theme.colors.background,
+                },
+              ]}
+            >
+              Log In
+            </Text>
           </Pressable>
         </View>
-
       </View>
     </ScreenWrapper>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
 
 const styles = StyleSheet.create({
   container: {
@@ -111,5 +122,5 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
   },
-  footerText: { color: theme.colors.textDark, fontSize: theme.radius.sm, }
-})
+  footerText: { color: theme.colors.textDark, fontSize: theme.radius.sm },
+});

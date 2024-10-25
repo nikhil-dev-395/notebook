@@ -9,11 +9,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
     const primaryColor = "blue";
 
     const icons = {
-        // index: 'home',
-        // AiChat: 'message1',
-        // Quick: 'rocket1',
-        // Search: 'search1',
-        // Account: 'user',
+
 
         index: 'HomeIcon',
         AiChat: 'AiIcon',
@@ -83,7 +79,7 @@ const styles = StyleSheet.create({
     tabBar: {
         position: "absolute",
         flexDirection: "row",
-        bottom: 20,
+        bottom: 0,
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "#f0f9ff",
